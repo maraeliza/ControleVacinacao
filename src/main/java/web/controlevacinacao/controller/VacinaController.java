@@ -114,11 +114,13 @@ public class VacinaController {
         redirectAttributes.addAttribute("mensagem", "Vacina alterada com sucesso");
         return "redirect:/mensagem";
     }
-    
+
+    @HxRequest
+    @HxLocation(path = "/mensagem", target = "#main", swap = "outerHTML")
     @GetMapping("/vacinas/remover/{codigo}")
-    public String remover(@PathVariable("codigo") Long codigo, RedirectAttributes atributos) {
-        vacinaService.desativar(codigo);
-        atributos.addAttribute("mensagem", "Vacina removida com sucesso");
+    public String removerHTMX(@PathVariable("codigo") Long codigo, RedirectAttributes attributes) {
+        vacinaService.remover(codigo);
+        attributes.addAttribute("mensagem", "Remoção efetuada com sucesso");
         return "redirect:/mensagem";
     }
 
